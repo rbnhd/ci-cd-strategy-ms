@@ -1,5 +1,15 @@
-# CI/CD Strategy for Microservices-Based Application
-This document presents a strategy for implementing Continuous Integration/Continuous Deployment (CI/CD) pipelines for a microservices-based application across multiple environments: development (dev), staging, and production.
+<br />
+<p align="center">
+
+  <h1 align="center">CI/CD Strategy for Microservices-Based Application</h1>
+
+  <p align="center">
+    This document presents a strategy for implementing Continuous Integration/Continuous Deployment (CI/CD) pipelines for a microservices-based application across multiple environments: development (dev), staging, and production.
+    <br />
+    <br />
+  </p>
+</p>
+
 
 ## Table of Contents
 - [Introduction](#introduction)
