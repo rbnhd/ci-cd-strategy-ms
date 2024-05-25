@@ -11,6 +11,8 @@
 </p>
 
 
+**:bangbang: NOTE**:bangbang:: For Japanese documentation, refer [日本語-README.md](./日本語-README.md)
+
 ## Table of Contents
 - [Introduction](#introduction)
 - [CI/CD Overview](#cicd-overview)
