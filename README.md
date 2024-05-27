@@ -115,9 +115,11 @@ Diagram on how to handle CI/CD for microservice based architecture on AWS, invol
 
 
 ## Environment Promotion
-Promotion between environments ensures that the exact same artifact (Docker image) that was tested in the previous environments is what gets deployed to production. \
+Promotion between environments ensures that the exact same artifact (Docker image) that was tested in the previous environments is what gets deployed to production.
+
 A simple environment promotion for multipe kubernetes environment in Google Cloud may look like this.\
 ![env-promotion-k8s](./resources/env-promotion-k8s.png)
+
 
 - **From Development to Staging:** Promotion from the development to the staging environment should be triggered after all tests in the development environment have passed successfully. This transition can be managed through a Git-based workflow where code changes are merged from the development branch to the staging branch, triggering the staging pipeline.
 
