@@ -1,4 +1,4 @@
 # Ignore files not intended to be tracked by git
-ATTENTION.md
+*ATTENTION.md
 temp/
 local/
