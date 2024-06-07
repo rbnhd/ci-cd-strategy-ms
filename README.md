@@ -32,7 +32,7 @@ In a microservices architecture, the application is composed of multiple service
 Implementing CI/CD pipelines in such a scenario can be complex due to the need for managing and coordinating deployments across multiple services and environments. This document outlines a strategy to tackle these challenges.
 
 
-
+<br>
 
 
 ## CI/CD Overview
@@ -46,8 +46,7 @@ A simple CI/CD architecture on AWS:\
 ![AWS CodePipeline](./resources/cicd_on_aws.png) 
 
 
-
-
+<br>
 
 
 ## Inter-dependent Microservices Architecture
@@ -65,9 +64,7 @@ A Microservices architecture, dependent on each other:\
 ![Interdependent Microservices Architecture](./resources/microservices_interdependent.png) 
 
 
-
-
-
+<br>
 
 ## Multiple Environments
 Maintaining separate environments for development, staging, and production is a best practice. Each environment should have its own version of the application, infrastructure, and configuration.
@@ -84,6 +81,7 @@ A multi environment release strategy:\
 ![multiple_environments](./resources/multiple_environments.png)
 
 
+<br>
 
 
 ## CI/CD Pipeline Design
@@ -109,9 +107,7 @@ Diagram on how to handle CI/CD for microservice based architecture on AWS, invol
 ![ci-cd-microsevices-multi-env](./resources/ci-cd-microsevices-multi-env.png)
 
 
-
-
-
+<br>
 
 
 ## Environment Promotion
@@ -136,9 +132,54 @@ A simple environment promotion for multipe kubernetes environment in Google Clou
             ![Canary Deployment](./resources/canary-deployment.png)
 
 
+<br>
+
+## Handling Environment Variables for Dev, Staging & Production
+
+Managing different environment variables for different environments is an integral part of multi-environment CI/CD pipelines. These environment variables often include sensitive information like database connection strings, API keys, and other environment-specific configurations. AWS provides several services to manage these secrets securely.
+
+### AWS Secrets Manager
+
+AWS Secrets Manager is a secrets management service that helps protect access to your applications, services, and IT resources. This enables you to easily rotate, manage, and retrieve secrets throughout their lifecycle.
+
+- You can store each environment's configurations as a separate secret in Secrets Manager. For example, you might have three secrets: `dev-config`, `stage-config`, and `prod-config`. Each secret would contain the environment-specific configurations for the respective environment.
+
+- In your CI/CD pipeline, you can configure the AWS Secrets Manager client to retrieve the configurations based on the current environment. This can be done by setting an environment variable in the pipeline that specifies the current environment, and then using this environment variable to retrieve the corresponding secret.
+
+### Kubernetes Secrets
+
+In the context of AWS EKS, Kubernetes Secrets can be used in conjunction with AWS Secrets Manager to manage sensitive information.
+
+- Kubernetes Secrets let you store and manage sensitive information, such as passwords, OAuth tokens, and ssh keys. You can create a Kubernetes Secret for each environment in the respective EKS cluster. The secret will contain the environment-specific configurations for the microservices in that environment. For example: 
+  ```yml
+  apiVersion: v1
+  kind: Secret
+  metadata:
+    name: my-secret
+  type: Opaque
+  data:
+    API_KEY: base64encodedvalue==
+  ```
+
+- In your application code, you can then reference these secrets. Kubernetes will automatically mount the secrets as environment variables in the containers at runtime. Here's how the above generated secret can be referenced: 
+  ```yml
+  apiVersion: v1
+  kind: Pod
+  metadata:
+    name: my-pod
+  spec:
+    containers:
+    - name: my-container
+      image: my-image
+      envFrom:
+      - secretRef:
+          name: my-secret
+  ```
+
+Remember to follow security best practices, such as **regularly rotating secrets, and granting least privilege** access to your secrets.
 
 
-
+<br>
 
 ## Monitoring and Observability
 Monitoring and observability should be an integral part of the CI/CD pipelines. 
@@ -157,8 +198,7 @@ Monitoring and observability should be an integral part of the CI/CD pipelines.
     ![openetelemetry-aws-eks](./resources/openetelemetry-aws-eks.png)
 
 
-
-
+<br>
 
 
 ## Security Considerations
@@ -182,9 +222,7 @@ A CI/CD pipeline incorporating security checks:\
 ![secure-cicd](./resources/ci-cd-security-check.png)
 
 
-
-
-
+<br>
 
 ## Conclusion
 Implementing CI/CD for a microservices-based application that supports multiple environments can be complex, but with the right approach and tools, it's achievable and beneficial. This strategy provides a robust framework for building, testing, and deploying microservices across multiple environments with an emphasis on automation, testing, and security.
