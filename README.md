@@ -20,6 +20,7 @@
 - [Multiple Environments](#multiple-environments)
 - [CI/CD Pipeline Design](#cicd-pipeline-design)
 - [Environment Promotion](#environment-promotion)
+- [Handling Environment Variables for Dev, Staging & Production](#handling-environment-variables-for-dev-staging--production)
 - [Monitoring and Observability](#monitoring-and-observability)
 - [Security Considerations](#security-considerations)
 - [Conclusion](#conclusion)
